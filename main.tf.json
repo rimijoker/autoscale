@@ -1,0 +1,41 @@
+{
+  "provider": {
+    "google": [
+      {
+        "credentials": "/home/rimijoker/GCP Login/terraform-gsoc.json",
+        "project": "terraform-275401",
+        "region": "us-central1"
+      }
+    ],
+    "google-beta": [
+      {
+        "credentials": "/home/rimijoker/GCP Login/terraform-gsoc.json",
+        "project": "terraform-275401",
+        "region": "us-central1"
+      }
+    ]
+  },
+  "resource": {
+    "google_billing_budget": {
+      "PyGrid_Autoscale_Budget": {
+        "provider": "google-beta",
+        "billing_account": "011AB6-83EE1B-0F96E3",
+        "display_name": "PyGrid-Autoscale-Budget",
+        "budget_filter": {
+          "projects": [
+            "projects/terraform-275401"
+          ]
+        },
+        "amount": {
+          "specified_amount": {
+            "currency_code": "USD",
+            "units": "1"
+          }
+        },
+        "threshold_rules": {
+          "threshold_percent": "0.1"
+        }
+      }
+    }
+  }
+}
