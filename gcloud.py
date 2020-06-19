@@ -37,13 +37,19 @@ class GoogleCloud:
             terraform_script.init()
 
     def create_budget(self, billing_account_id, apply=True):
-        self.config += google_billing_budget(
-            "PyGrid_Autoscale_Budget",
+        account = terrascript.data.google_billing_account(
+            "PickleBills",
             provider="google-beta",
             billing_account=billing_account_id,
-            display_name="PyGrid-Autoscale-Budget",
-            budget_filter = {"projects": ["projects/"+self.project_id]},
-            amount={"specified_amount": {"currency_code" : "USD", "units": "1"}},
+        )
+        self.config += account
+        self.config += google_billing_budget(
+            "test",
+            provider="google-beta",
+            billing_account=account.id,
+            display_name = "Example",
+            budget_filter={"projects": ["projects/"+self.project_id]},
+            amount={"specified_amount": {"currency_code" : "ZAR", "units": "1"}},
             threshold_rules = {"threshold_percent": "0.1"},
         )
 

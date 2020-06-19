@@ -4,8 +4,8 @@ import utils.gcloud_configurations as configs
 
 
 NEW = gcloud.GoogleCloud(
-    credentials="/home/rimijoker/GCP Login/terraform-gsoc.json",
-    project_id="terraform-275401",
+    credentials="/home/rimijoker/GCP Login/gcp-autoscaling-org.json",
+    project_id="gcp-autoscaling",
     region="us-central1",
 )
 
@@ -17,6 +17,6 @@ NEW = gcloud.GoogleCloud(
 #     target_size=3,
 # )
 
-NEW.create_budget("011AB6-83EE1B-0F96E3")
+NEW.create_budget("01EC12-68D5B3-B974BB")
 
 NEW.destroy()

@@ -2,33 +2,41 @@
   "provider": {
     "google": [
       {
-        "credentials": "/home/rimijoker/GCP Login/terraform-gsoc.json",
-        "project": "terraform-275401",
+        "credentials": "/home/rimijoker/GCP Login/gcp-autoscaling-org.json",
+        "project": "gcp-autoscaling",
         "region": "us-central1"
       }
     ],
     "google-beta": [
       {
-        "credentials": "/home/rimijoker/GCP Login/terraform-gsoc.json",
-        "project": "terraform-275401",
+        "credentials": "/home/rimijoker/GCP Login/gcp-autoscaling-org.json",
+        "project": "gcp-autoscaling",
         "region": "us-central1"
       }
     ]
   },
+  "data": {
+    "google_billing_account": {
+      "PickleBills": {
+        "provider": "google-beta",
+        "billing_account": "01EC12-68D5B3-B974BB"
+      }
+    }
+  },
   "resource": {
     "google_billing_budget": {
-      "PyGrid_Autoscale_Budget": {
+      "budget": {
         "provider": "google-beta",
-        "billing_account": "011AB6-83EE1B-0F96E3",
-        "display_name": "PyGrid-Autoscale-Budget",
+        "billing_account": "data.google_billing_account.PickleBills.id",
+        "display_name": "Example",
         "budget_filter": {
           "projects": [
-            "projects/terraform-275401"
+            "projects/gcp-autoscaling"
           ]
         },
         "amount": {
           "specified_amount": {
-            "currency_code": "USD",
+            "currency_code": "ZAR",
             "units": "1"
           }
         },
