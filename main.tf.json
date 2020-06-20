@@ -2,46 +2,77 @@
   "provider": {
     "google": [
       {
-        "credentials": "/home/rimijoker/GCP Login/gcp-autoscaling-org.json",
-        "project": "gcp-autoscaling",
+        "credentials": "/home/rimijoker/GCP Login/terraform-gsoc.json",
+        "project": "terraform-275401",
         "region": "us-central1"
       }
     ],
     "google-beta": [
       {
-        "credentials": "/home/rimijoker/GCP Login/gcp-autoscaling-org.json",
-        "project": "gcp-autoscaling",
+        "credentials": "/home/rimijoker/GCP Login/terraform-gsoc.json",
+        "project": "terraform-275401",
         "region": "us-central1"
       }
     ]
   },
-  "data": {
-    "google_billing_account": {
-      "PickleBills": {
-        "provider": "google-beta",
-        "billing_account": "01EC12-68D5B3-B974BB"
-      }
-    }
-  },
   "resource": {
-    "google_billing_budget": {
-      "budget": {
-        "provider": "google-beta",
-        "billing_account": "data.google_billing_account.PickleBills.id",
-        "display_name": "Example",
-        "budget_filter": {
-          "projects": [
-            "projects/gcp-autoscaling"
-          ]
-        },
-        "amount": {
-          "specified_amount": {
-            "currency_code": "ZAR",
-            "units": "1"
+    "google_compute_instance": {
+      "my-cluster1-master": {
+        "name": "my-cluster1-master",
+        "machine_type": "f1-micro",
+        "zone": "us-central1-a",
+        "boot_disk": {
+          "initialize_params": {
+            "image": "ubuntu-2004-lts"
           }
         },
-        "threshold_rules": {
-          "threshold_percent": "0.1"
+        "network_interface": {
+          "network": "default",
+          "access_config": {}
+        }
+      },
+      "my-cluster2-master": {
+        "name": "my-cluster2-master",
+        "machine_type": "f1-micro",
+        "zone": "us-central1-a",
+        "boot_disk": {
+          "initialize_params": {
+            "image": "centos-7"
+          }
+        },
+        "network_interface": {
+          "network": "default",
+          "access_config": {}
+        }
+      }
+    },
+    "google_compute_instance_template": {
+      "my-cluster1-template": {
+        "name": "my-cluster1-template",
+        "machine_type": "f1-micro",
+        "disk": {
+          "source_image": "ubuntu-2004-lts"
+        },
+        "network_interface": {
+          "network": "default",
+          "access_config": {}
+        },
+        "lifecycle": {
+          "create_before_destroy": true
+        }
+      },
+      "my-cluster2-template": {
+        "name": "my-cluster2-template",
+        "machine_type": "f1-micro",
+        "disk": {
+          "source_image": "centos-7"
+        },
+        "network_interface": {
+          "network": "default",
+          "access_config": {}
+        },
+        "lifecycle": {
+          "create_before_destroy": true
         }
       }
     }
